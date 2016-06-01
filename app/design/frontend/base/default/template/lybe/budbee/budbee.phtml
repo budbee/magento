@@ -1,0 +1,62 @@
+<?php
+$_code=$this->getMethodCode();
+$carrier = $this->getMethodInstance();
+$_rate = $this->getRate();
+?>
+
+<ul class="form-list" id="shipping_form_<?php echo $_rate->getCode() ?>"> <!--style="display:none;"-->
+    <li>
+        <label for="budbee_delivery_date" ><?php echo $this->__('Select Time') ?></label>
+        <span class="input-box">
+            <select name="budbee_delivery_date">
+                <option value='1464783219'><?php echo $this->__('Store1');?></option>
+                <option value='1464783211'><?php echo $this->__('Store2');?></option>
+            </select>
+        </span>
+        <label for="budbee_door_code"> <?php echo $this->__("Door Code") ?></label>
+        <span class="input-box">
+            <input type='text' name='budbee_door_code' id="<?php echo $_code ?>_door_code'" class='input-text' value='' />
+        </span>
+        <label for="budbee_outside_door"> <?php echo $this->__("Outside Door") ?></label>
+        <span class="input-box">
+             <select  name="budbee_outside_door">
+                 <option value='0'><?php echo $this->__('No');?></option>
+                 <option value='1'><?php echo $this->__('Yes');?></option>
+             </select>
+        </span>
+    </li>
+</ul>
+
+
+<script type="text/javascript">
+  /*  //<![CDATA[
+    var radioSelectorString = 'input[type="radio"][name="shipping_method"]';
+    $$(radioSelectorString).each(function(el){
+        Event.observe(el, 'click', function(){
+            if (el.checked == true){
+                var shippingCode = el.getValue();
+
+                $$(radioSelectorString).each( function(el){ el.disable(); } );
+                $('delivery-dates').hide();
+                $('delivery-dates-please-wait').show();
+
+                new Ajax.Request('<?php echo $this->getPostUrl() ?>', {
+                    method: 'post',
+                    parameters: { 'shipping_code': shippingCode },
+                    onSuccess: function(transport){
+                        var json = transport.responseText.evalJSON();
+                        Element.update('delivery-dates', json.dropdownhtml);
+                        $('delivery-dates-please-wait').hide();
+                        $('delivery-dates').show();
+                        $$(radioSelectorString).each( function(el){ el.enable(); } );
+                    },
+                    onFailure: function(){
+                        $('delivery-dates-please-wait').hide();
+                        $$(radioSelectorString).each( function(el){ el.enable(); } );
+                    }
+                });
+            }
+        });
+    });
+    //]]>*/
+</script>

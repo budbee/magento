@@ -1,0 +1,28 @@
+<?php if($this->displayDeliveryDate()): ?>
+<?php $data = $this->getDisplayDeliveryDate();
+    Mage::log($data, null , 'info.log');
+    ?>
+    <div class="col-set order-info-box">
+        <div class="col">
+            <div class="box">
+                <div class="box-title">
+                    <h2><?php echo $this->__('Expected Delivery Date') ?></h2>
+                </div>
+                <div class="box-content">
+                    <?php echo $this->escapeHtml($data['delivered_date']); ?>
+                </div>
+                <div class="box-content">
+                    <?php if ($data['door_code']) : ?>
+                        <h2><?php echo $this->__('Code Door') ?></h2>
+                        <?php echo $this->escapeHtml($data['door_code']); ?>
+                    <?php endif; ?>
+
+                    <?php if ($data['outside_door']) : ?>
+                        <h2><?php echo $this->__('Outside Door') ?></h2>
+                        <?php if ($data['outside_door'] == 1)  echo $this->__('Yes'); else  echo $this->__('No'); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

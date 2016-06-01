@@ -1,0 +1,5 @@
+app/code/community/Lybe/Budbee/ app/code/community/Lybe/Budbee/
+app/etc/modules/Lybe_Budbee.xml app/etc/modules/Lybe_Budbee.xml
+app/locale/sv_SE/Lybe_Budbee.csv app/locale/sv_SE/Lybe_Budbee.csv
+app/design/frontend/base/default/layout/lybe_budbee.xml app/design/frontend/base/default/layout/lybe_budbee.xml
+app/design/frontend/base/default/template/lybe/budbee/ app/design/frontend/base/default/template/lybe/budbee/

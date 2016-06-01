@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.shipping_method.available">
+           <action method='setTemplate'>
+                <template>lybe/budbee/checkout/onepage/shipping_method/available.phtml</template>
+           </action>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_shippingmethod>
+        <reference name="root">
+            <action method='setTemplate'>
+                <template>lybe/budbee/checkout/onepage/shipping_method/available.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_shippingmethod>
+
+    <sales_order_view>
+        <reference name="my.account.wrapper">
+            <block type="lybe_budbee/deliverydate" after='sales.order.info'></block>
+        </reference>
+    </sales_order_view>
+    <sales_order_invoice>
+        <reference name="my.account.wrapper">
+            <block type="lybe_budbee/deliverydate" after='sales.order.info'></block>
+        </reference>
+    </sales_order_invoice>
+    <sales_order_shipment>
+        <reference name="my.account.wrapper">
+            <block type="lybe_budbee/deliverydate" after='sales.order.info'></block>
+        </reference>
+    </sales_order_shipment>
+    <sales_order_creditmemo>
+        <reference name="my.account.wrapper">
+            <block type="lybe_budbee/deliverydate" after='sales.order.info'></block>
+        </reference>
+    </sales_order_creditmemo>
+    <sales_email_order_items>
+        <reference name="my.account.wrapper">
+            <block type="lybe_budbee/deliverydate" after='sales.order.info'></block>
+        </reference>
+    </sales_email_order_items>
+    <sales_email_order_invoice_items>
+        <reference name="my.account.wrapper">
+            <block type="lybe_budbee/deliverydate" after='sales.order.info'></block>
+        </reference>
+    </sales_email_order_invoice_items>
+    <!--sales_order_print sales_order_printinvoice  -->
+</layout>

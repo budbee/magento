@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Lybe_Budbee>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Shipping />
+                <Mage_Checkout />
+                <Mage_Sales />
+            </depends>
+        </Lybe_Budbee>
+    </modules>
+</config>
