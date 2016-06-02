@@ -15,6 +15,11 @@
                     <type_onepage>lybe_budbee_Model_Checkout_Onepage</type_onepage>
                 </rewrite>
             </checkout>
+            <sales>
+                <rewrite>
+                    <order>lybe_budbee_Model_Sales_Order</order>
+                </rewrite>
+            </sales>
         </models>
         <helpers>
             <lybe_budbee>
@@ -104,6 +109,15 @@
             </lybe_budbee>
         </routers>
     </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <adepta_deliverytime>
+                    <file>lybe_Budbee_Adminhtml.xml</file>
+                </adepta_deliverytime>
+            </updates>
+        </layout>
+    </adminhtml>
     <default>
         <carriers>
             <lybe_budbee>
