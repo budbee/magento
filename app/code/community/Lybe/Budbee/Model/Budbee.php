@@ -8,10 +8,45 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
      */
     protected $_code = Lybe_Budbee_Helper_Data::BUDBEE_SHIPPING_CODE;
 
+    public function __construct()
+    {
+        require_once(Mage::getBaseDir('lib') . '/Budbee/vendor/autoload.php');
+    }
+
+    public function setupApi()
+    {
+        $apiKey = $this->getBudbeeApiKey();
+        $apiSecret = $this->getBudbeeApiSecretKey();
+        $sandbox = $this->getSandBoxMode();
+        $client = new \Budbee\Client($apiKey, $apiSecret, $sandbox);
+        return $client;
+    }
 
     protected function _getHelper()
     {
         return Mage::helper('lybe_budbee');
+    }
+
+    public function showBudbeeAsShippingMethod()
+    {
+        $client = $this->setupApi();
+        $cart = Mage::getModel('checkout/cart')->getQuote();
+        $postalCode = $cart->getShippingAddress()->getPostcode();
+
+        if ($client){
+            $postalCodesAPI = new \Budbee\PostalcodesApi($client);
+            try {
+                $possibleCollectionPoints = $postalCodesAPI->checkPostalCode($postalCode);
+                if (count ($possibleCollectionPoints)){
+                    return true;
+                }
+            } catch (\Budbee\Exception\BudbeeException $e) {
+                //echo $e->getMessage(). "<br>"; write in log
+                return false;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -29,7 +64,7 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
         /** @var Mage_Shipping_Model_Rate_Result $result */
         $result = Mage::getModel('shipping/rate_result');
 
-        if ($is_Shippable)
+        if ($is_Shippable && $this->showBudbeeAsShippingMethod())
             $result->append($this->_getExpressRate());
 
         return $result;
@@ -62,5 +97,20 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
         $rate->setPrice($this->_getHelper()->getPrice());
         $rate->setCost(0);
         return $rate;
+    }
+
+    public function getSandBoxMode($development = false)
+    {
+        return $this->_getHelper()->getSandBoxMode($development);
+    }
+
+    public function getBudbeeApiKey()
+    {
+        return $this->_getHelper()->getBudbeeApiKey();
+    }
+
+    public function getBudbeeApiSecretKey()
+    {
+        return $this->_getHelper()->getBudbeeApiSecretKey();
     }
 }

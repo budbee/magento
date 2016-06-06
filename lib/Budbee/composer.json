@@ -1,0 +1,11 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/budbee/budbee-php"
+        }
+    ],
+    "require": {
+        "budbee/api-client": "dev-master"
+    }
+}

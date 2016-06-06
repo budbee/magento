@@ -31,7 +31,8 @@ $installer->addAttributeToSet( 'catalog_product', 'Default', 'General', 'ship_wi
 
 $installer->getConnection()
     ->addColumn($installer->getTable('sales/quote_address'), 'budbee_desired_delivery_date', array(
-        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TIMESTAMP,
+        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'length' => 255,
         'NULLABLE'  => true,
         'COMMENT'   => 'Budbee Desired Delivery Date'
     ));
@@ -50,7 +51,8 @@ $installer->getConnection()
 
 $installer->getConnection()
     ->addColumn($installer->getTable('sales/order'), 'budbee_desired_delivery_date', array(
-        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TIMESTAMP,
+        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'length' => 255,
         'NULLABLE'  => true,
         'COMMENT'   => 'Budbee Desired Delivery Date'
     ));
@@ -69,7 +71,8 @@ $installer->getConnection()
 
 $installer->getConnection()
     ->addColumn($installer->getTable('sales/order_grid'), 'budbee_desired_delivery_date', array(
-        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TIMESTAMP,
+        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'length' => 255,
         'NULLABLE'  => true,
         'COMMENT'   => 'Budbee Desired Delivery Date'
     ));

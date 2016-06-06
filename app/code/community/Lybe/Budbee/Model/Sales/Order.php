@@ -1,9 +1,9 @@
 <?php
 class Lybe_Budbee_Model_Sales_Order extends Mage_Sales_Model_Order
 {
-    public function getBudbeeDesiredDeliveryFormatedDate($format ='full')
+    public function getBudbeeDesiredDeliveryFormatedDate()
     {
-        return Mage::helper('core')->formatDate($this->getBudbeeDesiredDeliveryDate(), $format, true);
+        return Mage::helper('lybe_budbee')->formatDesiredDeliveryDate($this->getBudbeeDesiredDeliveryDate());
     }
 
     public function getBudbeeOutsideDoorformated()

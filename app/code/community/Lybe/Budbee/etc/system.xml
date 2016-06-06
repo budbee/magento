@@ -37,7 +37,7 @@
                         <show_in_store>0</show_in_store>
                     </title>
                     <budbee_username translate="label">
-                        <label>API Username</label>
+                        <label>API Key</label>
                         <comment>Contact <![CDATA[ <a href="http://www.budbee.com">Budbee</a>]]> to get it</comment>
                         <frontend_type>text</frontend_type>
                         <sort_order>4</sort_order>
@@ -46,7 +46,7 @@
                         <show_in_store>0</show_in_store>
                     </budbee_username>
                     <budbee_password translate="label">
-                        <label>API Password</label>
+                        <label>API Secret Key</label>
                         <comment>Contact <![CDATA[ <a href="http://www.budbee.com">Budbee</a>]]> to get it</comment>
                         <frontend_type>text</frontend_type>
                         <sort_order>5</sort_order>

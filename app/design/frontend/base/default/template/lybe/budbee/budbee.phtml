@@ -2,6 +2,8 @@
 $_code=$this->getMethodCode();
 $carrier = $this->getMethodInstance();
 $_rate = $this->getRate();
+$intervals = $this->getBudbeeIntervals();
+$firstInterval = $intervals[0];
 ?>
 
 <ul class="form-list" id="shipping_form_<?php echo $_rate->getCode() ?>"> <!--style="display:none;"-->
@@ -9,8 +11,12 @@ $_rate = $this->getRate();
         <label for="budbee_delivery_date" ><?php echo $this->__('Select Time') ?></label>
         <span class="input-box">
             <select name="budbee_delivery_date">
-                <option value='1464783219'><?php echo $this->__('Store1');?></option>
-                <option value='1464783211'><?php echo $this->__('Store2');?></option>
+                <?php foreach ($intervals as $key => $interval) :
+                    $value = strtotime($interval->delivery->start->format('Y-m-d H:i')). ":".strtotime($interval->delivery->stop->format('Y-m-d H:i'));
+                    $label = $interval->delivery->start->format('j D H:i'). " - ". $interval->delivery->stop->format('H:i');
+                ?>
+                <option value='<?php echo $value?>'><?php echo $this->__($label);?></option>
+                <?php endforeach; ?>
             </select>
         </span>
         <label for="budbee_door_code"> <?php echo $this->__("Door Code") ?></label>

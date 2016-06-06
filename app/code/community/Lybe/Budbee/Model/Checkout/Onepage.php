@@ -4,9 +4,6 @@ class Lybe_budbee_Model_Checkout_Onepage extends Mage_Checkout_Model_Type_Onepag
 {
     public function saveBilling($data, $customerAddressId)
     {
-        Mage::log($this->getQuote()->getShippingAddress()->getPostcode(), null ,'shipping_postalcode.log');
-        Mage::log($this->getQuote()->getBillingAddress()->getPostcode(), null ,'billing_postalcode.log');
-
         $desiredDeliveryDate = $this->getQuote()->getShippingAddress()->getBudbeeDesiredDeliveryDate();
         $doorCode = $this->getQuote()->getShippingAddress()->getBudbeeDoorCode();
         $outsideDoor = $this->getQuote()->getShippingAddress()->getBudbeeOutsideDoor();

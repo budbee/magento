@@ -19,8 +19,10 @@ class Lybe_budbee_Block_Deliverydate extends Mage_Core_Block_Template
 
     public function getDisplayDeliveryDate()
     {
+        $delivered_date = Mage::helper('lybe_budbee')->formatDesiredDeliveryDate($this->getOrder()->getBudbeeDesiredDeliveryDate());
+
         $info = array(
-            'delivered_date' => $this->getOrder()->getBudbeeDesiredDeliveryDate(),
+            'delivered_date' => $delivered_date,
             'door_code' => $this->getOrder()->getBudbeeDoorCode(),
             'outside_door' => $this->getOrder()->getBudbeeOutsideDoor()
         );
