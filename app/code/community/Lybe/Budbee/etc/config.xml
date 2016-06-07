@@ -76,6 +76,15 @@
                     </copy_delivery_date>
                 </observers>
             </sales_convert_order_to_quote>
+            <sales_order_place_after>
+                <observers>
+                    <lybe_budbee>
+                        <type>singleton</type>
+                        <class>lybe_budbee/observer</class>
+                        <method>createBudbeeOrder</method>
+                    </lybe_budbee>
+                </observers>
+            </sales_order_place_after>
         </events>
         <fieldsets>
             <sales_convert_quote_address>

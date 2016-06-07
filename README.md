@@ -40,8 +40,13 @@
 
 ### get intervals  
 1. DO I need to show up collection time with Order i backend ?
-2. additional info add to sales process add DoorCode , OutsideDoor 
+2. additional info add to sales process add DoorCode , OutsideDoor (animail's need ?)
 
+## Tell budbee php adapter
+1. collectionPointId(s) instead of collectionPointId
+2. edi ??
+3.  Can't connect to the api: http://sandbox.api.budbee.com/multiple/orders response code: 400
+   {"message":"Can not deserialize instance of long out of START_ARRAY token"}  check the object in border.log
 
 
 

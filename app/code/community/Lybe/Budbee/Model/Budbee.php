@@ -1,4 +1,22 @@
 <?php
+/**
+ *  Copyright 2016 Lybe AB.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *  @package     Lybe_budbee
+ *  @author      sabri.zouari@lybe.se
+ */
 class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract implements Mage_Shipping_Model_Carrier_Interface
 {
     /**
@@ -8,11 +26,18 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
      */
     protected $_code = Lybe_Budbee_Helper_Data::BUDBEE_SHIPPING_CODE;
 
+    /**
+     * load Lib/Budbee
+     */
     public function __construct()
     {
         require_once(Mage::getBaseDir('lib') . '/Budbee/vendor/autoload.php');
     }
 
+    /**
+     * Setup Api connexion
+     * @return \Budbee\Client
+     */
     public function setupApi()
     {
         $apiKey = $this->getBudbeeApiKey();
@@ -27,6 +52,11 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
         return Mage::helper('lybe_budbee');
     }
 
+    /**
+     * Call Budbee API to validate the postal code which determines the visibility of budbee shipping method
+     *
+     * @return bool
+     */
     public function showBudbeeAsShippingMethod()
     {
         $client = $this->setupApi();
@@ -113,4 +143,30 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
     {
         return $this->_getHelper()->getBudbeeApiSecretKey();
     }
+
+    /**
+     * Call Budbee Api to get available intervals
+     * @return array
+     */
+    public function getBudbeeIntervals()
+    {
+        $client = $this->setupApi();
+        $intervalAPI = new \Budbee\IntervalApi($client);
+        $cart = Mage::getModel('checkout/cart')->getQuote();
+        $postalCode = $cart->getShippingAddress()->getPostcode();
+        $intervalResponse = $intervalAPI->getIntervals($postalCode, 2);  //2 management ??
+
+        return $intervalResponse;
+    }
+
+    /**
+     * Call Budbee Order API
+     * @return \Budbee\OrderApi
+     */
+    public function getOrderApi()
+    {
+        $client = $this->setupApi();
+        return  new \Budbee\OrderApi($client);
+    }
+
 }
