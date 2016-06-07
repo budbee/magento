@@ -88,13 +88,13 @@ class Lybe_Budbee_Model_Observer
 
         foreach ($orderData->getAllVisibleItems() as $item){
 
-          $article = new \Budbee\Model\Article();
-          $article->name = $item->getName();
-          $article->reference = $item->getSku();
-          $article->quantity = $item->getQtyOrdered();
-          $article->unitPrice = intval($item->getPrice());
-          $article->discountRate = 0;
-          $article->taxRate = 10;
+            $article = new \Budbee\Model\Article();
+            $article->name = $item->getName();
+            $article->reference = $item->getSku();
+            $article->quantity = $item->getQtyOrdered();
+            $article->unitPrice = intval($item->getPrice());
+            $article->discountRate = 0;
+            $article->taxRate = 10;
             array_push($budbeeItems, $article);
         }
 

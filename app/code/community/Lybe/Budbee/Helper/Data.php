@@ -75,15 +75,35 @@ class Lybe_Budbee_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function _isShippable($items)
     {
+        $eavConfig = Mage::getModel('eav/config');
+
         foreach($items as $item){
 
             if($item->getProduct()->getTypeId() == self::CONFIGURABLE_PRODUCT_TYPE){
-               $_product = Mage::getModel('catalog/product')->load($item->getProductId());
-                if(!$_product->getShipWithBudbee()) return false;
+
+                $_product = Mage::getModel('catalog/product')->load($item->getProductId());
+                $attributes = $eavConfig->getEntityAttributeCodes(
+                    Mage_Catalog_Model_Product::ENTITY,
+                    $_product
+                );
+                if (in_array('ship_with_budbee',$attributes)) {
+                    if (!$_product->getShipWithBudbee()) return false; else true;
+                }else{
+                    return true;
+                }
+
 
             }else if ($item->getProduct()->getTypeId() == self::SIMPLE_PRODUCT_TYPE){
                 $_product = Mage::getModel('catalog/product')->load($item->getProductId());
-                if(!$_product->getShipWithBudbee()) return false;
+                $attributes = $eavConfig->getEntityAttributeCodes(
+                    Mage_Catalog_Model_Product::ENTITY,
+                    $_product
+                );
+                if (in_array('ship_with_budbee',$attributes)) {
+                    if (!$_product->getShipWithBudbee()) return false; else true;
+                }else{
+                    return true;
+                }
             }
 
         }
