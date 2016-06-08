@@ -77,7 +77,7 @@
                             <?php if ($_order->getBudbeeDesiredDeliveryDate()) : ?>
                               <h6><?php echo $this->__('Expected Delivery Date') ?></h6>
                               <div class="box-content">
-                                  <?php echo Mage::helper('lybe_budbee')->formatDesiredDeliveryDate($_order->getBudbeeDesiredDeliveryDate()); ?>
+                                  <?php echo Mage::helper('lybe_budbee')->formatDesiredDeliveryDate($_order->getBudbeeDesiredDeliveryDate() , true); ?>
                               </div>
                             <?php endif;?>
                             <?php if ($_order->getBudbeeDoorCode()) : ?>

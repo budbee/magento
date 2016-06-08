@@ -7,8 +7,12 @@
 ## Requirements
 
 1. Ask for credentials from Budbee
-2. Product attribute must be set to all shippable products (ship with budbee > yes)
-3. add to transactional Emails
+
+## How does it works
+1. All products are shippable with budbee
+3. Product attribute created and assigned to default attribute set (ship with budbee)
+ - if you want to exclude a product add the attribut to your attribute set then update the product (ship with budbee > no)
+4. if you want to show additional information about budbee in transactional Emails add the following code :
 
 ```<p><span>Selected time:</span> {{var order.getBudbeeDesiredDeliveryFormatedDate()}}</p>
 {{if order.budbee_door_code}}<p><span>Code Door: </span>{{var order.budbee_door_code}}</p>{{/if}}
@@ -32,5 +36,6 @@
 9. Unit tests
 10. log api , debug , exception
 11. connect lib from external fork
+12. add discountRate , Tax Rate in Budbee order
 
 

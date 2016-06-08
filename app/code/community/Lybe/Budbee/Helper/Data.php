@@ -20,6 +20,7 @@
 class Lybe_Budbee_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const BUDBEE_SHIPPING_CODE = 'lybe_budbee';
+    const BUDBEE_SHIPPING_METHOD = 'lybe_budbee_express';
 
     const BUDBEE_PRICE_XPATH = 'carriers/lybe_budbee/budbee_price';
     const BUDBEE_ACTIVE_XPATH  = 'carriers/lybe_budbee/active';
@@ -114,13 +115,22 @@ class Lybe_Budbee_Helper_Data extends Mage_Core_Helper_Abstract
      * formatting Date for frontend visibility
      *
      * @param $string timestamp delivery start and stop date
+     * @param boolean
      * @return string
      */
-    public function formatDesiredDeliveryDate($string){
+    public function formatDesiredDeliveryDate($string, $showCollection = false){
         $date =  explode(":",$string);
-        $start_date = date('Y-m-d H:i', $date[0]);
-        $end_date = date('H:i', $date[1]);
+        $delivery_start_date = date('Y-m-d H:i', $date[0]);
+        $delivery_end_date = date('H:i', $date[1]);
 
-        return $start_date. " - ".$end_date;
+        $collection_start_date = date('Y-m-d H:i', $date[2]);
+        $collection_end_date = date('H:i', $date[3]);
+
+        if ($showCollection){
+            $html = $delivery_start_date. " - ".$delivery_end_date . "<br><h6>" .$this->__('Collection time'). ":</h6> " . $collection_start_date . " - ". $collection_end_date;
+            return $html;
+        }else{
+            return $delivery_start_date. " - ".$delivery_end_date;
+        }
     }
 }

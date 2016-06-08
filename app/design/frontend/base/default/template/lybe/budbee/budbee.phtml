@@ -1,9 +1,8 @@
 <?php
-$_code=$this->getMethodCode();
+$_code = $this->getMethodCode();
 $carrier = $this->getMethodInstance();
 $_rate = $this->getRate();
 $intervals = $this->getBudbeeIntervals();
-$firstInterval = $intervals[0];
 ?>
 
 <ul class="form-list" id="shipping_form_<?php echo $_rate->getCode() ?>"> <!--style="display:none;"-->
@@ -12,7 +11,10 @@ $firstInterval = $intervals[0];
         <span class="input-box">
             <select name="budbee_delivery_date">
                 <?php foreach ($intervals as $key => $interval) :
-                    $value = strtotime($interval->delivery->start->format('Y-m-d H:i')). ":".strtotime($interval->delivery->stop->format('Y-m-d H:i'));
+                    $value = strtotime($interval->delivery->start->format('Y-m-d H:i')). ":"
+                            .strtotime($interval->delivery->stop->format('Y-m-d H:i')). ":"
+                            .strtotime($interval->collection->start->format('Y-m-d H:i')). ":"
+                            .strtotime($interval->collection->stop->format('Y-m-d H:i'));
                     $label = $interval->delivery->start->format('j D H:i'). " - ". $interval->delivery->stop->format('H:i');
                 ?>
                 <option value='<?php echo $value?>'><?php echo $this->__($label);?></option>
@@ -30,39 +32,16 @@ $firstInterval = $intervals[0];
                  <option value='1'><?php echo $this->__('Yes');?></option>
              </select>
         </span>
+        <label for="budbee_additional_info"> <?php echo $this->__("Additional information") ?></label>
+        <span class="input-box">
+            <textarea name="budbee_additional_info" ></textarea>
+        </span>
     </li>
 </ul>
 
 
 <script type="text/javascript">
   /*  //<![CDATA[
-    var radioSelectorString = 'input[type="radio"][name="shipping_method"]';
-    $$(radioSelectorString).each(function(el){
-        Event.observe(el, 'click', function(){
-            if (el.checked == true){
-                var shippingCode = el.getValue();
 
-                $$(radioSelectorString).each( function(el){ el.disable(); } );
-                $('delivery-dates').hide();
-                $('delivery-dates-please-wait').show();
-
-                new Ajax.Request('<?php echo $this->getPostUrl() ?>', {
-                    method: 'post',
-                    parameters: { 'shipping_code': shippingCode },
-                    onSuccess: function(transport){
-                        var json = transport.responseText.evalJSON();
-                        Element.update('delivery-dates', json.dropdownhtml);
-                        $('delivery-dates-please-wait').hide();
-                        $('delivery-dates').show();
-                        $$(radioSelectorString).each( function(el){ el.enable(); } );
-                    },
-                    onFailure: function(){
-                        $('delivery-dates-please-wait').hide();
-                        $$(radioSelectorString).each( function(el){ el.enable(); } );
-                    }
-                });
-            }
-        });
-    });
     //]]>*/
 </script>

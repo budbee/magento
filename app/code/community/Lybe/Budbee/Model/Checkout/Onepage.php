@@ -34,12 +34,16 @@ class Lybe_budbee_Model_Checkout_Onepage extends Mage_Checkout_Model_Type_Onepag
         $desiredDeliveryDate = $this->getQuote()->getShippingAddress()->getBudbeeDesiredDeliveryDate();
         $doorCode = $this->getQuote()->getShippingAddress()->getBudbeeDoorCode();
         $outsideDoor = $this->getQuote()->getShippingAddress()->getBudbeeOutsideDoor();
+        $additionalInfo = $this->getQuote()->getShippingAddress()->getBudbeeAdditionalInfo();
+
+        Mage::log("save billing :".$additionalInfo , null , 'billing.log');
 
         $returnValue = parent::saveBilling($data, $customerAddressId);
 
         $this->getQuote()->getShippingAddress()->setBudbeeDesiredDeliveryDate($desiredDeliveryDate);
         $this->getQuote()->getShippingAddress()->setBudbeeDoorCode($doorCode);
         $this->getQuote()->getShippingAddress()->setBudbeeOutsideDoor($outsideDoor);
+        $this->getQuote()->getShippingAddress()->setBudbeeAdditionalInfo($additionalInfo);
 
         $this->getQuote()->getShippingAddress()->save();
 

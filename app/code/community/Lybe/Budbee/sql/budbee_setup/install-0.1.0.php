@@ -37,6 +37,12 @@ $installer->getConnection()
         'COMMENT'   => 'Budbee Desired Delivery Date'
     ));
 $installer->getConnection()
+    ->addColumn($installer->getTable('sales/quote_address'), 'budbee_additional_info', array(
+        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'NULLABLE'  => true,
+        'COMMENT'   => 'Budbee Additional information'
+    ));
+$installer->getConnection()
     ->addColumn($installer->getTable('sales/quote_address'), 'budbee_door_code', array(
         'TYPE'      => Varien_Db_Ddl_Table::TYPE_SMALLINT,
         'NULLABLE'  => true,
@@ -57,6 +63,12 @@ $installer->getConnection()
         'COMMENT'   => 'Budbee Desired Delivery Date'
     ));
 $installer->getConnection()
+    ->addColumn($installer->getTable('sales/order'), 'budbee_additional_info', array(
+        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'NULLABLE'  => true,
+        'COMMENT'   => 'Budbee Additional information'
+    ));
+$installer->getConnection()
     ->addColumn($installer->getTable('sales/order'), 'budbee_door_code', array(
         'TYPE'      => Varien_Db_Ddl_Table::TYPE_SMALLINT,
         'NULLABLE'  => true,
@@ -75,6 +87,12 @@ $installer->getConnection()
         'length' => 255,
         'NULLABLE'  => true,
         'COMMENT'   => 'Budbee Desired Delivery Date'
+    ));
+$installer->getConnection()
+    ->addColumn($installer->getTable('sales/order_grid'), 'budbee_additional_info', array(
+        'TYPE'      => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'NULLABLE'  => true,
+        'COMMENT'   => 'Budbee Additional information'
     ));
 $installer->getConnection()
     ->addColumn($installer->getTable('sales/order_grid'), 'budbee_door_code', array(
