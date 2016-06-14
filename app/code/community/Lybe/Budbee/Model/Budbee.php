@@ -154,7 +154,27 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
         $intervalAPI = new \Budbee\IntervalApi($client);
         $cart = Mage::getModel('checkout/cart')->getQuote();
         $postalCode = $cart->getShippingAddress()->getPostcode();
-        $intervalResponse = $intervalAPI->getIntervals($postalCode, 2);  //2 management ??
+        /*
+         * check if interval by Number is enabled
+         * n always goes first
+         */
+        if ($this->_getHelper()->isIntervalByNumber() == true) {
+            $intervalResponse = $intervalAPI->getIntervals($postalCode, $this->_getHelper()->getIntervalByNumber());
+        }elseif  ($this->_getHelper()->isIntervalByDate() == true) {
+            /*
+             *
+             * @todo
+             *
+             * $fromDate  = Today + $this->_getHelper()->getStartIntervalDate()
+             * $toDate = $fromDate + $this->_getHelper()->getIntervalDateValue()
+             */
+            $fromDate = null;
+            $toDate = null;
+            $intervalResponse = $intervalAPI->getIntervalsFromToDate($postalCode, $fromDate, $toDate);
+        }else{
+            // if there is no setting in backendget interval by 2 by default
+            $intervalResponse = $intervalAPI->getIntervals($postalCode, 2);
+        }
 
         return $intervalResponse;
     }

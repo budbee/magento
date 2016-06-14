@@ -4,7 +4,7 @@ $carrier = $this->getMethodInstance();
 $_rate = $this->getRate();
 $intervals = $this->getBudbeeIntervals();
 ?>
-
+<?php if (count($intervals) ) : ?>
 <ul class="form-list" id="shipping_form_<?php echo $_rate->getCode() ?>"> <!--style="display:none;"-->
     <li>
         <label for="budbee_delivery_date" ><?php echo $this->__('Select Time') ?></label>
@@ -38,6 +38,7 @@ $intervals = $this->getBudbeeIntervals();
         </span>
     </li>
 </ul>
+<?php endif; ?>
 
 
 <script type="text/javascript">

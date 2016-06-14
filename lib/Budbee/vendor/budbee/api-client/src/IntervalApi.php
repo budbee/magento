@@ -97,5 +97,45 @@ class IntervalApi
         $responseObject = $this->apiClient->deserialize($response, 'array[\Budbee\Model\OrderIntervalResponse]');
         return $responseObject;
     }
+
+
+    /**
+     * @author sabri.zouari@lybe.se
+     *
+     * Get intervals by Date interval
+     * @param string $postalCode The postalcode to get intervals for
+     * @param string $date Get all intervals up to and including this date in format "YYYY-MM-DD".
+     * @return array[\Budbee\Model\OrderInterval]
+     */
+    public function getIntervalsFromToDate($postalCode, $fromDate, $toDate)
+    {
+        //parse inputs
+        $resourcePath = "/intervals/{postalCode}/{fromDate}/{toDate}";
+        $method = Client::$GET;
+        $queryParams = array();
+        $headerParams = array(
+            'Accept' => 'application/vnd.budbee.intervals-v2+json',
+            'Content-Type' => 'application/vnd.budbee.intervals-v2+json'
+        );
+
+        if ( (null != $fromDate) && ((null != $toDate))){
+            $resourcePath = str_replace("{postalCode}", $this->apiClient->toPathValue($postalCode), $resourcePath);
+            $resourcePath = str_replace("{fromDate}", $this->apiClient->toPathValue($fromDate), $resourcePath);
+            $resourcePath = str_replace("{toDate}", $this->apiClient->toPathValue($toDate), $resourcePath);
+        }
+        //make the API Call
+        if (!isset($body)) {
+            $body = null;
+        }
+        $response = $this->apiClient->callAPI($resourcePath, $method, $queryParams, $body, $headerParams);
+
+
+        if (!$response) {
+            return null;
+        }
+
+        $responseObject = $this->apiClient->deserialize($response, 'array[\Budbee\Model\OrderIntervalResponse]');
+        return $responseObject;
+    }
 }
 

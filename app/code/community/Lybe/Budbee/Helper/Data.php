@@ -34,6 +34,12 @@ class Lybe_Budbee_Helper_Data extends Mage_Core_Helper_Abstract
     const BUDBEE_SANDBOX_URL = 'http://sandbox.api.budbee.com'; // Sandbox url
     const BUDBEE_LOCALHOST_URL = "http://localhost:9300"; // Internal development
 
+    const BUDBEE_INTERVAL_BY_NUMBER = "carriers/lybe_budbee/interval_by_number";
+    const BUDBEE_INTERVAL_BY_NUMBER_VALUE = "carriers/lybe_budbee/interval_number_value";
+    const BUDBEE_INTERVAL_BY_DATE = "carriers/lybe_budbee/interval_by_date";
+    const BUDBEE_INTERVAL_STARTDATE_VALUE = "carriers/lybe_budbee/interval_startdate_value";
+    const BUDBEE_INTERVAL_DATE_VALUE = "carriers/lybe_budbee/interval_date_value";
+
     public function getPrice($store = null)
     {
         return Mage::getStoreConfig(self::BUDBEE_PRICE_XPATH , $store);
@@ -52,6 +58,31 @@ class Lybe_Budbee_Helper_Data extends Mage_Core_Helper_Abstract
     public function getBudbeeApiSecretKey($store = null)
     {
         return Mage::getStoreConfig(self::BUDBEE_API_SECRET_KEY, $store);
+    }
+
+    public function isIntervalByNumber($store = null)
+    {
+        return Mage::getStoreConfig(self::BUDBEE_INTERVAL_BY_NUMBER, $store);
+    }
+
+    public function getIntervalByNumber($store = null)
+    {
+        return Mage::getStoreConfig(self::BUDBEE_INTERVAL_BY_NUMBER_VALUE, $store);
+    }
+
+    public function isIntervalByDate($store = null)
+    {
+        return Mage::getStoreConfig(self::BUDBEE_INTERVAL_BY_DATE, $store);
+    }
+
+    public function getStartIntervalDate($store = null)
+    {
+        return Mage::getStoreConfig(self::BUDBEE_INTERVAL_STARTDATE_VALUE, $store);
+    }
+
+    public function getIntervalDateValue($store = null)
+    {
+        return Mage::getStoreConfig(self::BUDBEE_INTERVAL_DATE_VALUE, $store);
     }
 
     public function getSandBoxMode($development = false, $store = null)
