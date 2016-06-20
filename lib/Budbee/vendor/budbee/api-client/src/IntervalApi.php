@@ -123,13 +123,13 @@ class IntervalApi
             $resourcePath = str_replace("{fromDate}", $this->apiClient->toPathValue($fromDate), $resourcePath);
             $resourcePath = str_replace("{toDate}", $this->apiClient->toPathValue($toDate), $resourcePath);
         }
+
         //make the API Call
         if (!isset($body)) {
             $body = null;
         }
+       
         $response = $this->apiClient->callAPI($resourcePath, $method, $queryParams, $body, $headerParams);
-
-
         if (!$response) {
             return null;
         }

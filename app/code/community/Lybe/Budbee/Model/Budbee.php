@@ -57,7 +57,7 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
      *
      * @return bool
      */
-    public function showBudbeeAsShippingMethod()
+    public function showBudbeeAsShippingMethod($hidden = false)
     {
         $client = $this->setupApi();
         $cart = Mage::getModel('checkout/cart')->getQuote();
@@ -94,7 +94,11 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
         /** @var Mage_Shipping_Model_Rate_Result $result */
         $result = Mage::getModel('shipping/rate_result');
 
-        if ($is_Shippable && $this->showBudbeeAsShippingMethod())
+
+        // check if there is date interval returned
+        $validInterval = $this->getBudbeeIntervals();
+
+        if ($is_Shippable && $this->showBudbeeAsShippingMethod() && $validInterval)
             $result->append($this->_getExpressRate());
 
         return $result;
@@ -161,20 +165,17 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
         if ($this->_getHelper()->isIntervalByNumber() == true) {
             $intervalResponse = $intervalAPI->getIntervals($postalCode, $this->_getHelper()->getIntervalByNumber());
         }elseif  ($this->_getHelper()->isIntervalByDate() == true) {
-            /*
-             *
-             * @todo
-             *
-             * $fromDate  = Today + $this->_getHelper()->getStartIntervalDate()
-             * $toDate = $fromDate + $this->_getHelper()->getIntervalDateValue()
-             */
-            $fromDate = null;
-            $toDate = null;
-            $intervalResponse = $intervalAPI->getIntervalsFromToDate($postalCode, $fromDate, $toDate);
+
+            $now = Mage::getModel('core/date')->gmtTimestamp();
+            $fromDate =  $now + (3600 * 24) * intval( $this->_getHelper()->getStartIntervalDate());
+            $toDate = $fromDate + (3600 * 24) * intval( $this->_getHelper()->getIntervalDateValue());
+            $intervalResponse = $intervalAPI->getIntervalsFromToDate($postalCode, date('Y-m-d',$fromDate), date('Y-m-d',$toDate));
+
         }else{
             // if there is no setting in backendget interval by 2 by default
             $intervalResponse = $intervalAPI->getIntervals($postalCode, 2);
         }
+
 
         return $intervalResponse;
     }
