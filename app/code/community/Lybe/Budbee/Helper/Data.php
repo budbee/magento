@@ -40,6 +40,8 @@ class Lybe_Budbee_Helper_Data extends Mage_Core_Helper_Abstract
     const BUDBEE_INTERVAL_STARTDATE_VALUE = "carriers/lybe_budbee/interval_startdate_value";
     const BUDBEE_INTERVAL_DATE_VALUE = "carriers/lybe_budbee/interval_date_value";
 
+    const BUDBEE_OUTSIDE_DOOR = "carriers/lybe_budbee/budbee_outside_door";
+
     public function getPrice($store = null)
     {
         return Mage::getStoreConfig(self::BUDBEE_PRICE_XPATH , $store);
