@@ -37,5 +37,6 @@
 10. log api , debug , exception
 11. connect lib from external fork
 12. add discountRate , Tax Rate in Budbee order
+13. handleResponse in magento's way
 
 
