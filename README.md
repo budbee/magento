@@ -41,3 +41,4 @@ modman clone https://github.com/budbee/magento
  - [ ] Log api, debug, exception
  - [ ] Connect lib from external fork
  - [ ] Add discountRate, Tax Rate in Budbee order
+ - [ ] handleResponse in magento's way

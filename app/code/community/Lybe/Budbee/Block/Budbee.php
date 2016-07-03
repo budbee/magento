@@ -32,4 +32,9 @@ class Lybe_Budbee_Block_Budbee extends Mage_Checkout_Block_Onepage_Abstract
         $model = Mage::getModel('lybe_budbee/budbee');
         return $model->getBudbeeIntervals();
     }
+
+    public function isOutSideDoor()
+    {
+        return Mage::getStoreConfig(Lybe_Budbee_Helper_Data::BUDBEE_OUTSIDE_DOOR);
+    }
 }
